@@ -22,6 +22,7 @@ import MainNews from './sections/MainNews.vue';
 
 .main-content {
   max-width: 1240px;
+  width: 100%;
   margin: 0 auto;
   flex: 1;
   margin-bottom: 40px;

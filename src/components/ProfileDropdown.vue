@@ -1,13 +1,21 @@
 <script setup lang="ts">
-const emit = defineEmits(['close']);
+const emit = defineEmits<{
+  (e: 'close'): void
+}>();
+
+const handleAction = (action: string) => {
+  console.log(`Action triggered: ${action}`);
+  emit('close');
+};
+
 </script>
 
 <template>
   <div class="user-profile__dropdown dropdown-menu">
     <ul class="dropdown-menu__list">
-      <li class="dropdown-menu__item" @click="emit('close')">Мій профіль</li>
-      <li class="dropdown-menu__item" @click="emit('close')">Налаштування</li>
-      <li class="dropdown-menu__item" @click="emit('close')">
+      <li class="dropdown-menu__item" @click="handleAction('profile')">Мій профіль</li>
+      <li class="dropdown-menu__item" @click="handleAction('settings')">Налаштування</li>
+      <li class="dropdown-menu__item" @click="handleAction('exit')">
         Вихід
         <img src="/src/assets/icons/icon-exit.svg" alt="exit" />
       </li>

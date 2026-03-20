@@ -3,9 +3,22 @@ import { ref, computed } from 'vue';
 import mainImg from '@/assets/imgs/main-news.png';
 import news1Img from '@/assets/imgs/news1.png';
 import news2Img from '@/assets/imgs/news2.png';
-import tagIcon from '@/assets/icons/icon-tag.svg'
+import tagIcon from '@/assets/icons/icon-tag.svg';
 
-const categories = [
+interface Category {
+  id: number;
+  name: string;
+}
+
+interface NewsItem {
+  id: number;
+  time: string;
+  title: string;
+  text?: string;
+  img: string;
+}
+
+const categories: Category[] = [
   { id: 1, name: 'COVID-19' },
   { id: 2, name: 'Выборы 2020' },
   { id: 3, name: 'Антимонопольный закон' },
@@ -13,7 +26,7 @@ const categories = [
   { id: 5, name: 'Антимонопольный закон', }
 ];
 
-const newsFeed = ref([
+const newsFeed = ref<NewsItem[]>([
   { id: 1, time: "08:45", title: "Коронавірус у Києві: за добу діагноз підтвердили у 559 осіб, 23 пацієнти померли", text: "За минулу добу коронавірус діагностували у 559 киян, 23 людини померли. Джерело: мер Києва Віталій Кличко під час онлайн пресконференції.", img: mainImg },
   { id: 2, time: '08:30', title: 'Україна зібрала вже 80% врожаю зернових культур', text: "", img: news1Img },
   { id: 3, time: '08:45', title: 'Росія заборонила співробітникам ФСБ мати дозвіл на проживання...', img: news2Img },
@@ -22,13 +35,13 @@ const newsFeed = ref([
   { id: 6, time: '10:20', title: 'Україна зібрала вже 80% врожаю зернових культур', img: news1Img },
 ]);
 
-const activeId = ref(newsFeed.value[0].id);
+const activeId = ref<number>(newsFeed.value[0].id);
 
-const selectedNews = computed(() => {
+const selectedNews = computed<NewsItem>(() => {
   return newsFeed.value.find(news => news.id === activeId.value) || newsFeed.value[0];
 });
 
-const selectNews = (id: number) => {
+const selectNews = (id: number): void => {
   activeId.value = id;
 };
 </script>
@@ -94,8 +107,8 @@ const selectNews = (id: number) => {
             </div>
 
             <div class="news-item__content">
-              <time class="news-item__time">{{ item.time }}</time>
               <h3 class="news-item__title">
+                <time class="news-item__time">{{ item.time }}</time>
                 <span class="news-item__link">{{ item.title }}</span>
               </h3>
             </div>
@@ -369,21 +382,44 @@ const selectNews = (id: number) => {
     }
   }
 
+  .news-card {
+    gap: 8px;
+
+    &__title {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    &__text {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
   .news-card-small {
+    width: 276px;
+
     &__img {
-      height: auto;
-      aspect-ratio: 16 / 10;
+      width: 100%;
+      height: 156px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
     }
   }
 
   .news-card-small-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    height: 212px;
+    overflow: scroll;
     gap: 12px;
     margin-bottom: 20px;
   }
-
-  .news-card-small__img {}
 
   .mobile-feed {
     display: flex;
@@ -398,15 +434,28 @@ const selectNews = (id: number) => {
     gap: 12px;
     padding: 12px 0;
 
-    .news-item__image-wrapper {
-      flex: 0 0 90px;
-      height: 60px;
-      aspect-ratio: auto;
+    .news-item {
+      &__image-wrapper {
+        width: 120px;
+        height: 75px;
+      }
+
+      &__content {
+        .news-item__time {
+          margin-right: 10px;
+        }
+
+        .news-item__title {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 22px;
+        }
+      }
     }
   }
 
   .more-news-btn {
-    border-radius: 20px;
+    border-radius: 24px;
   }
 }
 </style>

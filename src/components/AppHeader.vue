@@ -10,12 +10,12 @@ interface NavLink {
 
 type Locale = 'UA' | 'RU';
 
-const isSidebarOpen = ref(false);
-const isProfileOpen = ref(false);
+const isSidebarOpen = ref<boolean>(false);
+const isProfileOpen = ref<boolean>(false);
 const currentLocale = ref<Locale>('UA');
-const notificationsCount = ref(1);
-const activeMainLink = ref("ПОЛИТИКА");
-const isMoreMenuOpen = ref(false);
+const notificationsCount = ref<number>(1);
+const activeMainLink = ref<string>("ПОЛИТИКА");
+const isMoreMenuOpen = ref<boolean>(false);
 const profileRef = ref<HTMLElement | null>(null);
 const moreMenuRef = ref<HTMLElement | null>(null);
 
@@ -42,20 +42,20 @@ const mainNavLinks: NavLink[] = [
   { name: "ФОТО", href: "#" }
 ];
 
-const toggleSidebar = () => {
+const toggleSidebar = (): void => {
   isSidebarOpen.value = !isSidebarOpen.value;
 };
 
-const setLocale = (locale: Locale) => {
+const setLocale = (locale: Locale): void => {
   currentLocale.value = locale;
   console.log(`Language changed to: ${locale}`);
 };
 
-const setActive = (name: string) => {
+const setActive = (name: string): void => {
   activeMainLink.value = name;
 };
 
-const toggleMoreMenu = () => {
+const toggleMoreMenu = (): void => {
   isMoreMenuOpen.value = !isMoreMenuOpen.value;
 };
 
@@ -399,7 +399,6 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1024px) {
-
   .header-content {
     padding: 10px 0;
   }
@@ -410,14 +409,14 @@ onUnmounted(() => {
   }
 
   .header-content__logo {
-    width: 68px;
+    width: 91px;
     height: auto;
     margin-left: 8px;
   }
 
   .header-content__lang {
     display: flex;
-    font-size: 11px;
+    font-size: 12px;
     gap: 4px;
     margin-left: auto;
     margin-right: 15px;
@@ -448,7 +447,6 @@ onUnmounted(() => {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     padding: 0 16px;
-    gap: 20px;
 
     &::-webkit-scrollbar {
       display: none;
@@ -463,7 +461,7 @@ onUnmounted(() => {
     }
 
     &__link {
-      font-size: 13px;
+      font-size: 14px;
       color: $header-text;
       padding-bottom: 8px;
 
