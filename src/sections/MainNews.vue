@@ -3,9 +3,22 @@ import { ref, computed } from 'vue';
 import mainImg from '@/assets/imgs/main-news.png';
 import news1Img from '@/assets/imgs/news1.png';
 import news2Img from '@/assets/imgs/news2.png';
-import tagIcon from '@/assets/icons/icon-tag.svg'
+import tagIcon from '@/assets/icons/icon-tag.svg';
 
-const categories = [
+interface Category {
+  id: number;
+  name: string;
+}
+
+interface NewsItem {
+  id: number;
+  time: string;
+  title: string;
+  text?: string;
+  img: string;
+}
+
+const categories: Category[] = [
   { id: 1, name: 'COVID-19' },
   { id: 2, name: 'Выборы 2020' },
   { id: 3, name: 'Антимонопольный закон' },
@@ -13,7 +26,7 @@ const categories = [
   { id: 5, name: 'Антимонопольный закон', }
 ];
 
-const newsFeed = ref([
+const newsFeed = ref<NewsItem[]>([
   { id: 1, time: "08:45", title: "Коронавірус у Києві: за добу діагноз підтвердили у 559 осіб, 23 пацієнти померли", text: "За минулу добу коронавірус діагностували у 559 киян, 23 людини померли. Джерело: мер Києва Віталій Кличко під час онлайн пресконференції.", img: mainImg },
   { id: 2, time: '08:30', title: 'Україна зібрала вже 80% врожаю зернових культур', text: "", img: news1Img },
   { id: 3, time: '08:45', title: 'Росія заборонила співробітникам ФСБ мати дозвіл на проживання...', img: news2Img },
@@ -22,13 +35,13 @@ const newsFeed = ref([
   { id: 6, time: '10:20', title: 'Україна зібрала вже 80% врожаю зернових культур', img: news1Img },
 ]);
 
-const activeId = ref(newsFeed.value[0].id);
+const activeId = ref<number>(newsFeed.value[0].id);
 
-const selectedNews = computed(() => {
+const selectedNews = computed<NewsItem>(() => {
   return newsFeed.value.find(news => news.id === activeId.value) || newsFeed.value[0];
 });
 
-const selectNews = (id: number) => {
+const selectNews = (id: number): void => {
   activeId.value = id;
 };
 </script>

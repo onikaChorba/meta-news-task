@@ -10,12 +10,12 @@ interface NavLink {
 
 type Locale = 'UA' | 'RU';
 
-const isSidebarOpen = ref(false);
-const isProfileOpen = ref(false);
+const isSidebarOpen = ref<boolean>(false);
+const isProfileOpen = ref<boolean>(false);
 const currentLocale = ref<Locale>('UA');
-const notificationsCount = ref(1);
-const activeMainLink = ref("ПОЛИТИКА");
-const isMoreMenuOpen = ref(false);
+const notificationsCount = ref<number>(1);
+const activeMainLink = ref<string>("ПОЛИТИКА");
+const isMoreMenuOpen = ref<boolean>(false);
 const profileRef = ref<HTMLElement | null>(null);
 const moreMenuRef = ref<HTMLElement | null>(null);
 
@@ -42,20 +42,20 @@ const mainNavLinks: NavLink[] = [
   { name: "ФОТО", href: "#" }
 ];
 
-const toggleSidebar = () => {
+const toggleSidebar = (): void => {
   isSidebarOpen.value = !isSidebarOpen.value;
 };
 
-const setLocale = (locale: Locale) => {
+const setLocale = (locale: Locale): void => {
   currentLocale.value = locale;
   console.log(`Language changed to: ${locale}`);
 };
 
-const setActive = (name: string) => {
+const setActive = (name: string): void => {
   activeMainLink.value = name;
 };
 
-const toggleMoreMenu = () => {
+const toggleMoreMenu = (): void => {
   isMoreMenuOpen.value = !isMoreMenuOpen.value;
 };
 

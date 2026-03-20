@@ -6,22 +6,25 @@ defineProps<{
   currentLocale: Locale
 }>();
 
-const rubrics = [
+const rubrics: string[] = [
   'НОВОСТИ', 'РЕГИОНЫ', 'СПОРТ', 'СТАВКИ', 'ФИНАНСЫ',
   'ШОУ-БИЗНЕС', 'LIFESTYLE', 'ЗДОРОВЬЕ', 'IT', 'АВТО'
 ];
 
-const projects = [
+const projects: string[] = [
   'ПОЧТА', 'ПОГОДА', 'ТВ-ПРОГРАММА', 'КАРТЫ', 'ПЕРЕВОДЧИК'
 ];
 
-const emit = defineEmits(['close', 'update:locale']);
+const emit = defineEmits<{
+  (e: 'close'): void;
+  (e: 'update:locale', locale: Locale): void;
+}>();
 
 const setLocale = (locale: Locale) => {
   emit('update:locale', locale);
 };
 
-const closeMenu = () => {
+const closeMenu = (): void => {
   emit('close');
 };
 </script>
