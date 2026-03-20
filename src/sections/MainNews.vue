@@ -94,8 +94,8 @@ const selectNews = (id: number) => {
             </div>
 
             <div class="news-item__content">
-              <time class="news-item__time">{{ item.time }}</time>
               <h3 class="news-item__title">
+                <time class="news-item__time">{{ item.time }}</time>
                 <span class="news-item__link">{{ item.title }}</span>
               </h3>
             </div>
@@ -369,21 +369,44 @@ const selectNews = (id: number) => {
     }
   }
 
+  .news-card {
+    gap: 8px;
+
+    &__title {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    &__text {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
   .news-card-small {
+    width: 276px;
+
     &__img {
-      height: auto;
-      aspect-ratio: 16 / 10;
+      width: 100%;
+      height: 156px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
     }
   }
 
   .news-card-small-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    height: 212px;
+    overflow: scroll;
     gap: 12px;
     margin-bottom: 20px;
   }
-
-  .news-card-small__img {}
 
   .mobile-feed {
     display: flex;
@@ -398,15 +421,28 @@ const selectNews = (id: number) => {
     gap: 12px;
     padding: 12px 0;
 
-    .news-item__image-wrapper {
-      flex: 0 0 90px;
-      height: 60px;
-      aspect-ratio: auto;
+    .news-item {
+      &__image-wrapper {
+        width: 120px;
+        height: 75px;
+      }
+
+      &__content {
+        .news-item__time {
+          margin-right: 10px;
+        }
+
+        .news-item__title {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 22px;
+        }
+      }
     }
   }
 
   .more-news-btn {
-    border-radius: 20px;
+    border-radius: 24px;
   }
 }
 </style>

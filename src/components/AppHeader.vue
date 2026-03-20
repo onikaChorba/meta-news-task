@@ -399,7 +399,6 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1024px) {
-
   .header-content {
     padding: 10px 0;
   }
@@ -410,14 +409,14 @@ onUnmounted(() => {
   }
 
   .header-content__logo {
-    width: 68px;
+    width: 91px;
     height: auto;
     margin-left: 8px;
   }
 
   .header-content__lang {
     display: flex;
-    font-size: 11px;
+    font-size: 12px;
     gap: 4px;
     margin-left: auto;
     margin-right: 15px;
@@ -448,7 +447,6 @@ onUnmounted(() => {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     padding: 0 16px;
-    gap: 20px;
 
     &::-webkit-scrollbar {
       display: none;
@@ -463,7 +461,7 @@ onUnmounted(() => {
     }
 
     &__link {
-      font-size: 13px;
+      font-size: 14px;
       color: $header-text;
       padding-bottom: 8px;
 
