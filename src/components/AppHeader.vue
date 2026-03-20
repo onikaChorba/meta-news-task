@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
+import SidebarMenu from './SidebarMenu.vue';
 
 interface NavLink {
   name: string;
@@ -8,6 +9,7 @@ interface NavLink {
 
 type Locale = 'UA' | 'RU';
 
+const isSidebarOpen = ref(false);
 const isProfileOpen = ref(false);
 const currentLocale = ref<Locale>('UA');
 const notificationsCount = ref(1);
@@ -38,6 +40,10 @@ const mainNavLinks: NavLink[] = [
   { name: "ВИДЕО", href: "#" },
   { name: "ФОТО", href: "#" }
 ];
+
+const toggleSidebar = () => {
+  isSidebarOpen.value = !isSidebarOpen.value;
+};
 
 const setLocale = (locale: Locale) => {
   currentLocale.value = locale;
@@ -80,9 +86,13 @@ onUnmounted(() => {
       <header class="header">
         <div class="header-content">
           <div class="header-content__left">
-            <button class="header-content__burger">
+            <button class="header-content__burger" @click="toggleSidebar">
               <img src="/src/assets/icons/icon-menu.svg" alt="menu" />
             </button>
+
+            <SidebarMenu :is-open="isSidebarOpen" :current-locale="currentLocale" @close="isSidebarOpen = false"
+              @update:locale="setLocale" />
+
             <div class="header-content__logo">
               <img src="/src/assets/imgs/logo.png" alt="logo" />
             </div>
@@ -453,6 +463,5 @@ onUnmounted(() => {
       margin-top: 8px;
     }
   }
-
 }
 </style>
