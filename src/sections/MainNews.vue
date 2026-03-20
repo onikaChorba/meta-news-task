@@ -172,7 +172,16 @@ const selectNews = (id: number) => {
   gap: 4px;
 
   &__image-wrapper {
-    width: 40%;
+    flex: 0 0 100px;
+    aspect-ratio: 1 / 1;
+    border-radius: 6px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   &__time {
@@ -225,11 +234,10 @@ const selectNews = (id: number) => {
 
   &__img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
-    display: block;
-    transition: transform 0.5s ease;
     border-radius: 12px;
+    display: block;
   }
 
   &__title {
@@ -263,13 +271,17 @@ const selectNews = (id: number) => {
   gap: 8px;
 
   &__img {
-    width: 100%;
-    height: 156px;
-
-    img {
+    &__img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
+      aspect-ratio: 3 / 2;
+      border-radius: 8px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 
@@ -357,6 +369,13 @@ const selectNews = (id: number) => {
     }
   }
 
+  .news-card-small {
+    &__img {
+      height: auto;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
   .news-card-small-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -378,6 +397,12 @@ const selectNews = (id: number) => {
     align-items: flex-start;
     gap: 12px;
     padding: 12px 0;
+
+    .news-item__image-wrapper {
+      flex: 0 0 90px;
+      height: 60px;
+      aspect-ratio: auto;
+    }
   }
 
   .more-news-btn {
