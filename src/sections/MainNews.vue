@@ -47,19 +47,22 @@ const selectNews = (id: number) => {
     </div>
 
     <div class="main-grid">
-      <div class="main-grid__sidebar hide-mobile">
+      <div class="main-grid__mobile-title hide-mobile">
+        <h2 class="news-feed__title">ГЛАВНОЕ</h2>
+        <div class="news-feed__list">
+          <article v-for="item in newsFeed" :key="item.id" class="news-item"
+            :class="{ 'news-item--active': activeId === item.id }" @click="selectNews(item.id)">
+            <time class="news-item__time">{{ item.time }}</time>
+            <h3 class="news-item__title">
+              <span class="news-item__link">{{ item.title }}</span>
+            </h3>
+          </article>
+        </div>
+      </div>
+
+      <div class="main-grid__sidebar hide-desktop">
         <aside class="news-feed">
           <h2 class="news-feed__title">ГЛАВНОЕ</h2>
-
-          <div class="news-feed__list">
-            <article v-for="item in newsFeed" :key="item.id" class="news-item"
-              :class="{ 'news-item--active': activeId === item.id }" @click="selectNews(item.id)">
-              <time class="news-item__time">{{ item.time }}</time>
-              <h3 class="news-item__title">
-                <span class="news-item__link">{{ item.title }}</span>
-              </h3>
-            </article>
-          </div>
         </aside>
       </div>
 
@@ -82,6 +85,23 @@ const selectNews = (id: number) => {
             <h3 class="news-card-small__title">Україна зібрала вже 80% врожаю зернових культур</h3>
           </article>
         </div>
+
+        <div class="news-feed__list feed-list-mobile">
+          <article v-for="item in newsFeed" :key="item.id" class="news-item news-item--mobile"
+            :class="{ 'news-item--active': activeId === item.id }" @click="selectNews(item.id)">
+            <div class="news-item__image-wrapper">
+              <img :src="item.img" :alt="item.title" class="news-item__img" />
+            </div>
+
+            <div class="news-item__content">
+              <time class="news-item__time">{{ item.time }}</time>
+              <h3 class="news-item__title">
+                <span class="news-item__link">{{ item.title }}</span>
+              </h3>
+            </div>
+          </article>
+        </div>
+
         <button class="more-news-btn">
           Больше новостей
           <span class="more-news-btn__arrow"><img src="/src/assets/icons/icon-arrow-large.svg" /></span>
@@ -151,6 +171,19 @@ const selectNews = (id: number) => {
   flex-direction: column;
   gap: 4px;
 
+  &__image-wrapper {
+    flex: 0 0 100px;
+    aspect-ratio: 1 / 1;
+    border-radius: 6px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
   &__time {
     font-family: 'Roboto';
     font-style: normal;
@@ -201,11 +234,10 @@ const selectNews = (id: number) => {
 
   &__img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
-    display: block;
-    transition: transform 0.5s ease;
     border-radius: 12px;
+    display: block;
   }
 
   &__title {
@@ -239,13 +271,17 @@ const selectNews = (id: number) => {
   gap: 8px;
 
   &__img {
-    width: 100%;
-    height: 156px;
-
-    img {
+    &__img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
+      aspect-ratio: 3 / 2;
+      border-radius: 8px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 
@@ -263,6 +299,8 @@ const selectNews = (id: number) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  align-self: center;
+  max-width: 276px;
   width: 100%;
   height: 40px;
   border-radius: 28px;
@@ -280,6 +318,95 @@ const selectNews = (id: number) => {
   &:hover {
     background: $primary-blue;
     color: #fff;
+  }
+}
+
+.hide-desktop {
+  display: none;
+}
+
+.feed-list-mobile {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+
+  .hide-mobile {
+    display: none;
+  }
+
+  .hide-desktop {
+    display: block;
+  }
+
+  .feed-list-mobile {
+    display: block;
+    margin-bottom: 32px;
+  }
+
+  .main-news {
+    padding: 0 16px;
+    gap: 16px;
+  }
+
+  .category-bar__list {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 8px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .main-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__mobile-title {
+      margin-bottom: -10px;
+    }
+  }
+
+  .news-card-small {
+    &__img {
+      height: auto;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  .news-card-small-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .news-card-small__img {}
+
+  .mobile-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 20px;
+  }
+
+  .news-item--mobile {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+
+    .news-item__image-wrapper {
+      flex: 0 0 90px;
+      height: 60px;
+      aspect-ratio: auto;
+    }
+  }
+
+  .more-news-btn {
+    border-radius: 20px;
   }
 }
 </style>
