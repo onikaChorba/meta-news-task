@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import SidebarMenu from './SidebarMenu.vue';
+import ProfileDropdown from './ProfileDropdown.vue';
 
 interface NavLink {
   name: string;
@@ -132,13 +133,7 @@ onUnmounted(() => {
                   <img src="/src/assets/icons/icon-user.svg" alt="user" />
                 </button>
 
-                <div v-if="isProfileOpen" class="user-profile__dropdown dropdown-menu">
-                  <ul class="dropdown-menu__list">
-                    <li class="dropdown-menu__item">Мій профіль</li>
-                    <li class="dropdown-menu__item">Налаштування</li>
-                    <li class="dropdown-menu__item">Вихід <img src="/src/assets/icons/icon-exit.svg" /></li>
-                  </ul>
-                </div>
+                <ProfileDropdown v-if="isProfileOpen" @close="isProfileOpen = false" />
               </div>
 
               <button class="user-actions__btn">
@@ -188,8 +183,9 @@ onUnmounted(() => {
 }
 
 .header {
-  max-width: 1208px;
+  max-width: 1240px;
   margin: 0 auto;
+  padding: 0 16px;
 
   &__divider {
     width: 100%;
@@ -400,68 +396,99 @@ onUnmounted(() => {
 
 .user-profile {
   position: relative;
+}
 
-  &__dropdown {
-    position: absolute;
-    top: calc(100% + 15px);
-    right: -10px;
-    background-color: $header-text;
-    width: 200px;
-    height: 153px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 1000;
+@media (max-width: 1024px) {
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: -6px;
-      right: 15px;
-      width: 12px;
-      height: 12px;
-      background-color: $header-text;
-      transform: rotate(45deg);
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+  .header-content {
+    padding: 10px 0;
+  }
+
+  .nav-top,
+  .header__divider {
+    display: none;
+  }
+
+  .header-content__logo {
+    width: 68px;
+    height: auto;
+    margin-left: 8px;
+  }
+
+  .header-content__lang {
+    display: flex;
+    font-size: 11px;
+    gap: 4px;
+    margin-left: auto;
+    margin-right: 15px;
+
+    .lang-switcher__divider {
+      height: 10px;
+      align-self: center;
+    }
+  }
+
+  .user-actions {
+    gap: 12px;
+
+    &__btn img {
+      width: 20px;
+    }
+
+    .user-actions__btn:last-child {
+      display: none;
+    }
+  }
+
+  .header__mainlink {
+    padding: 10px 0;
+    background-color: $header-bg;
+    margin: 0 -16px;
+  }
+
+  .main-link {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 16px;
+    gap: 20px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &__item {
+      flex: 0 0 auto;
+
+      &--more {
+        display: none;
+      }
+    }
+
+    &__link {
+      font-size: 13px;
+      color: $header-text;
+      padding-bottom: 8px;
+
+      &.is-active::after {
+        bottom: 0;
+      }
     }
   }
 }
 
-.dropdown-menu {
-  display: flex;
-  flex-direction: column;
-
-  &__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    margin-top: 8px;
-    margin-bottom: 8px;
+@media (max-width: 360px) {
+  .header-content__left {
+    gap: 8px;
   }
 
-  &__item {
-    padding: 12px 20px;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
+  .header-content__lang {
+    margin-right: 8px;
+  }
 
-    color: $tag-color;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-
-    &:hover {
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.03)), #FFFFFF;
-    }
-
-    &:last-child {
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px solid rgba(0, 0, 0, 0.05);
-      margin-top: 8px;
-    }
+  .user-actions {
+    gap: 8px;
   }
 }
 </style>

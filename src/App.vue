@@ -21,9 +21,10 @@ import MainNews from './sections/MainNews.vue';
 }
 
 .main-content {
-  max-width: 1208px;
+  max-width: 1240px;
   margin: 0 auto;
   flex: 1;
   margin-bottom: 40px;
+  padding: 0 16px;
 }
 </style>
