@@ -37,43 +37,45 @@ const closeMenu = (): void => {
           <img src="@/assets/imgs/logo-light-theme.png" alt="META" />
         </div>
 
-        <nav class="sidebar__nav">
-          <div class="sidebar__section">
-            <h4 class="sidebar__title">Рубрики</h4>
-            <ul class="sidebar__list">
-              <li v-for="item in rubrics" :key="item" :class="{ 'is-active': item === 'СПОРТ' }">
-                <a href="#">{{ item }}</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="sidebar__section">
-            <h4 class="sidebar__title">Проекты мета</h4>
-            <ul class="sidebar__list">
-              <li v-for="item in projects" :key="item">
-                <a href="#">{{ item }}</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-
-        <div class="sidebar__footer footer-sidebar">
-          <div class="footer-sidebar__item">
-            <span class="footer-sidebar__label">Темная тема</span>
-            <div class="theme-switch">
-              <input type="checkbox" id="theme-toggle" class="theme-switch__input" />
-              <label for="theme-toggle" class="theme-switch__slider"></label>
+        <div class="sidebar__wrapper">
+          <nav class="sidebar__nav">
+            <div class="sidebar__section">
+              <h4 class="sidebar__title">Рубрики</h4>
+              <ul class="sidebar__list">
+                <li v-for="item in rubrics" :key="item" :class="{ 'is-active': item === 'СПОРТ' }">
+                  <a href="#">{{ item }}</a>
+                </li>
+              </ul>
             </div>
-          </div>
 
-          <div class="footer-sidebar__item">
-            <span class="footer-sidebar__label">Текст новостей</span>
-            <div class="lang-switcher">
-              <button type="button" class="lang-switcher__btn" :class="{ 'is-active': currentLocale === 'UA' }"
-                @click="setLocale('UA')">UA</button>
-              <span class="lang-switcher__divider"></span>
-              <button type="button" class="lang-switcher__btn" :class="{ 'is-active': currentLocale === 'RU' }"
-                @click="setLocale('RU')">RU</button>
+            <div class="sidebar__section">
+              <h4 class="sidebar__title">Проекты мета</h4>
+              <ul class="sidebar__list">
+                <li v-for="item in projects" :key="item">
+                  <a href="#">{{ item }}</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+
+          <div class="sidebar__footer footer-sidebar">
+            <div class="footer-sidebar__item">
+              <span class="footer-sidebar__label">Темная тема</span>
+              <div class="theme-switch">
+                <input type="checkbox" id="theme-toggle" class="theme-switch__input" />
+                <label for="theme-toggle" class="theme-switch__slider"></label>
+              </div>
+            </div>
+
+            <div class="footer-sidebar__item">
+              <span class="footer-sidebar__label">Текст новостей</span>
+              <div class="lang-switcher">
+                <button type="button" class="lang-switcher__btn" :class="{ 'is-active': currentLocale === 'UA' }"
+                  @click="setLocale('UA')">UA</button>
+                <span class="lang-switcher__divider"></span>
+                <button type="button" class="lang-switcher__btn" :class="{ 'is-active': currentLocale === 'RU' }"
+                  @click="setLocale('RU')">RU</button>
+              </div>
             </div>
           </div>
         </div>
@@ -92,7 +94,6 @@ const closeMenu = (): void => {
   height: 100vh;
   z-index: 2000;
   display: flex;
-  overflow-y: auto;
 
   &__content {
     width: 300px;
@@ -101,6 +102,16 @@ const closeMenu = (): void => {
     display: flex;
     flex-direction: column;
     background-color: $side-bar-bg;
+  }
+
+  &__wrapper {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &__logo {
