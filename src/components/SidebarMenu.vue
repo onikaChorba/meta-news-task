@@ -268,4 +268,88 @@ const closeMenu = () => {
     transform: translateX(-100%);
   }
 }
+
+@media (max-width: 1024px) {
+
+  .nav-top,
+  .header__divider,
+  .user-actions__btn:last-child {
+    display: none;
+  }
+
+  .header-content {
+    padding: 10px 0;
+
+    &__left {
+      gap: 12px;
+    }
+
+    &__logo {
+      width: 70px;
+    }
+
+    &__lang {
+      margin-left: auto;
+      margin-right: 12px;
+      gap: 4px;
+      font-size: 11px;
+    }
+
+    &__actions {
+      gap: 12px;
+    }
+  }
+
+  .header__mainlink {
+    padding: 12px 0;
+    margin: 0 -16px;
+    background-color: #2D2D2D;
+  }
+
+  .main-link {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0 16px;
+    gap: 20px;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &__item {
+      flex: 0 0 auto;
+
+      &--more {
+        display: none;
+      }
+    }
+
+    &__link {
+      font-size: 13px;
+      white-space: nowrap;
+
+      &::after {
+        bottom: -12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .header-content {
+    &__left {
+      gap: 8px;
+    }
+
+    &__lang {
+      margin-right: 8px;
+    }
+
+    .user-actions {
+      gap: 8px;
+    }
+  }
+}
 </style>

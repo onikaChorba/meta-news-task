@@ -434,10 +434,6 @@ onUnmounted(() => {
     &__btn img {
       width: 20px;
     }
-
-    .user-actions__btn:last-child {
-      display: none;
-    }
   }
 
   .header__mainlink {
